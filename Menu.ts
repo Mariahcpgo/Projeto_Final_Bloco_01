@@ -1,13 +1,11 @@
 import leia = require('readline-sync')
-import { Produto } from './Src/Model/Produto';
 import { Eletronico } from './Src/Model/Eletronico';
 import { Controller } from './Controller/Controller';
 
 export function main() {
 
 let opcao, id, preco: number;
-let nome, tipo: string;
-let marca: string;
+let nome, tipo, marca: string;
 
 const controller: Controller = new Controller();
 
@@ -16,19 +14,19 @@ controller.cadastrar(new Eletronico(controller.gerarId(), "Iphone 15", "marca", 
 while(true) {
  
     console.log("*****************************************");
-    console.log("                                         ");
-    console.log("         E-COMMERCE DA MARIAH            ");
-    console.log("                                         ");
+    console.log("*                                       *");
+    console.log("*        E-COMMERCE DA MARIAH           *");
+    console.log("*                                       *");
     console.log("*****************************************");
-    console.log("                                         ");
-    console.log("    1. Listar todos os Produtos          ");
-    console.log("    2. Listar Produto pelo ID            ");
-    console.log("    3. Cadastrar Produto                 ");
-    console.log("    4. Atualizar Produto                 ");
-    console.log("    5. Deletar Produto                   ");
-    console.log("    9. Sair                              ");
-    console.log("                                         ");
-    console.log("  ***************************************");
+    console.log("*                                       *");
+    console.log("*   1. Listar todos os Produtos         *");
+    console.log("*   2. Listar Produto pelo ID           *");
+    console.log("*   3. Cadastrar Produto                *");
+    console.log("*   4. Atualizar Produto                *");
+    console.log("*   5. Deletar Produto                  *");
+    console.log("*   9. Sair                             *");
+    console.log("*                                       *");
+    console.log("*****************************************");
     console.log("                                         ");
 
     console.log("Entre com a opcao desejada: ");
@@ -61,7 +59,8 @@ while(true) {
         nome = leia.question("Digite o nome do produto: ")
         tipo = leia.question("Digite o tipo de produto: ")
         preco = leia.questionFloat("Digite o preco do produto: ")
-        controller.cadastrar(new Eletronico(controller.gerarId(), nome, tipo, preco, "Marca"));
+        marca = leia.question("Digite a marca do produto: ")
+        controller.cadastrar(new Eletronico(controller.gerarId(), nome, tipo, preco, marca));
 
         KeyPress();
         break;
@@ -76,7 +75,8 @@ while(true) {
           nome = leia.question("Digite o nome do produto: ");
           tipo = produto.tipo;
           preco = leia.questionFloat("Digite o preco do produto: ");
-          controller.atualizar(new Eletronico(id, nome, tipo, preco, "Marca"))
+          marca = leia.question("Digite a marca do produto: ")
+          controller.atualizar(new Eletronico(id, nome, tipo, preco, marca))
         } else {
           console.log("Produto nao encontrado!")
         }

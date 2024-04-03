@@ -87,6 +87,5 @@ export abstract class Produto {
     console.log(` Tipo do Produto: ${this._tipo}`          );
     console.log(` Preco do Produto: ${this._preco}`        );
     console.log("*****************************************");
-    console.log("                                         ");
     }
 }
