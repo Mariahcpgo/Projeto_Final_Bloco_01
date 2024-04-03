@@ -1,13 +1,17 @@
 import leia = require('readline-sync')
 import { Produto } from './Src/Model/Produto';
 import { Eletronico } from './Src/Model/Eletronico';
+import { Controller } from './Controller/Controller';
 
 export function main() {
 
-let opcao: number;
+let opcao, id, preco: number;
+let nome, tipo: string;
+let marca: string;
 
-const tenis: Eletronico = new Eletronico(1, "Iphone 14", "Celular", 5000, "Iphone")
-tenis.visualizar();
+const controller: Controller = new Controller();
+
+controller.cadastrar(new Eletronico(controller.gerarId(), "Iphone 15", "marca", 5000, "Iphone"))
 
 while(true) {
  
@@ -38,27 +42,53 @@ while(true) {
 
     switch (opcao) {
       case 1:
-        console.log("\n\nListar todos os Produtos\n\n");
+        console.log("\n\nListar todos os Produtos: \n\n");
+        controller.listarTodos();
+
         KeyPress();
         break;
         
       case 2:
-        console.log("\n\nListar Produto pelo ID\n\n");
+        console.log("\n\nListar Produto pelo ID: \n\n");
+        id = leia.questionInt("Digite o ID do Produto: ");
+        controller.procurarPorId(id);
+          
         KeyPress();
         break;
         
       case 3:
         console.log("\n\nCadastrar Produto\n\n");
+        nome = leia.question("Digite o nome do produto: ")
+        tipo = leia.question("Digite o tipo de produto: ")
+        preco = leia.questionFloat("Digite o preco do produto: ")
+        controller.cadastrar(new Eletronico(controller.gerarId(), nome, tipo, preco, "Marca"));
+
         KeyPress();
         break;
 
       case 4:
         console.log("\n\nAtualizar Produto\n\n");
+        id = leia.questionInt("Digite o ID do produto: ")
+
+        let produto = controller.buscarNoArray(id);
+
+        if(produto !== null) {
+          nome = leia.question("Digite o nome do produto: ");
+          tipo = produto.tipo;
+          preco = leia.questionFloat("Digite o preco do produto: ");
+          controller.atualizar(new Eletronico(id, nome, tipo, preco, "Marca"))
+        } else {
+          console.log("Produto nao encontrado!")
+        }
+
         KeyPress();
         break;
 
       case 5:
         console.log("\n\nDeletar Produto\n\n");
+        id = leia.questionInt("Digite o ID do produto: ");
+        controller.deletar(id);
+
         KeyPress();
         break;
 
