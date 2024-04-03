@@ -1,8 +1,13 @@
 import leia = require('readline-sync')
+import { Produto } from './Src/Model/Produto';
+import { Eletronico } from './Src/Model/Eletronico';
 
 export function main() {
 
 let opcao: number;
+
+const tenis: Eletronico = new Eletronico(1, "Iphone 14", "Celular", 5000, "Iphone")
+tenis.visualizar();
 
 while(true) {
  
@@ -34,26 +39,32 @@ while(true) {
     switch (opcao) {
       case 1:
         console.log("\n\nListar todos os Produtos\n\n");
+        KeyPress();
         break;
         
       case 2:
         console.log("\n\nListar Produto pelo ID\n\n");
+        KeyPress();
         break;
         
       case 3:
         console.log("\n\nCadastrar Produto\n\n");
+        KeyPress();
         break;
 
       case 4:
         console.log("\n\nAtualizar Produto\n\n");
+        KeyPress();
         break;
 
       case 5:
         console.log("\n\nDeletar Produto\n\n");
+        KeyPress();
         break;
 
         default:
             console.log("\nOpcao invalida!\n");
+            KeyPress();
             break;
 
     }
@@ -65,6 +76,12 @@ export function about(): void {
     console.log("\nGeneration Brasil - generation@generation.org");
     console.log("\ngithub.com/projeto_final_bloco_01            ");
     console.log("\n*********************************************");
+}
+
+function KeyPress(): void {
+    console.log("\nPrecione ENTER para continuar")
+    leia.prompt();
+
 }
 
 main();
